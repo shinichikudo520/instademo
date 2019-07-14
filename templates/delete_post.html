@@ -1,0 +1,9 @@
+<h1>Delete Post</h1>
+
+<form action='' method='post'>
+    {% comment %} django自带，防止form表单被网络攻击 {% endcomment %}
+    {% csrf_token %} 
+    {% comment %} CreateView基础类的默认抛出的form对象，as_p即表单model指定的类Post的所有属性都作为一个表单item {% endcomment %}
+    <p>Are you sure you want to delete {{object.title}}? </p>
+    <button type='submit'>Delete Post</button>
+</form>

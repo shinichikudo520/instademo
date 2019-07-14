@@ -1,5 +1,7 @@
 from django.db import models
+from django.urls import reverse
 from imagekit.models import ProcessedImageField
+
 
 # Create your models here.
 class Post(models.Model):
@@ -10,3 +12,9 @@ class Post(models.Model):
         blank=True, 
         null=True,
     )
+
+    # 重定向提交表单的目标url
+    def get_absolute_url(self):
+        return reverse("post_detail", args=[str(self.id)])
+        # reverse会遍历所有urls，找一个post_detail的路径，args是传的参数
+    

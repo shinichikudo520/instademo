@@ -19,5 +19,13 @@ from django.urls import path,include
 from . import views
 
 urlpatterns = [
-    path('',views.HelloDjango.as_view(),name='home'),
+    path('',views.PostView.as_view(),name='home'),
+    path('post/<int:pk>/',views.PostDetail.as_view(),name='post_detail'),
+    # 配置创建表单的路由
+    path('make_post/',views.PostCreateView.as_view(),name='make_post'),
+    # 配置更新表单的路由
+    path('update_post/<int:pk>/',views.PostUpdateView.as_view(),name='update_post'),
+    # 配置删除图片
+    path('delete_post/<int:pk>/',views.PostDeleteView.as_view(),name='delete_post'),
+
 ]
