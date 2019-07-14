@@ -25,7 +25,7 @@ SECRET_KEY = '%mxlqdl)ump)docn11)hqy6y0q+gtvjn5przg92k4-=)=2d#dj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] # 允许所有host进行访问
 
 
 # Application definition
@@ -121,3 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+LOGIN_REDIRECT_URL = 'home' # django.contrib.auth自带app中的登录post请求成功后重定向的路径
+LOGOUT_REDIRECT_URL = 'login' # django.contrib.auth自带app中的登出post请求成功后重定向的路径
+
+AUTH_USER_MODEL = 'Insta.InstaUser'

@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from Insta.views import SignupView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Insta.urls')),
+    # django.contrib.auth是django自带的一个app，跟Insta一样，它也有自己的urls，指定了路径http://127.0.0.1:8000/auth/login/跳转到/registration/login.html
+    path('auth/',include('django.contrib.auth.urls')),# 必须在template下创建一个叫registration的文件夹，文件夹下找一个login.html
+    # 在setting.py中设置post成功的重定向路径 LOGIN_REDIRECT_URL = 'home'
+    path('auth/signup/',SignupView.as_view(),name='signup'),# 必须在template下创建一个叫registration的文件夹，文件夹下找一个login.html
+
+
 ]
 
 # Content Management System

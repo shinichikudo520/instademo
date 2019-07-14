@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from imagekit.models import ProcessedImageField
 
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Post(models.Model):
@@ -12,9 +13,22 @@ class Post(models.Model):
         blank=True, 
         null=True,
     )
+    
+
+    def __str__(self):
+        return self.title
 
     # 重定向提交表单的目标url
     def get_absolute_url(self):
         return reverse("post_detail", args=[str(self.id)])
         # reverse会遍历所有urls，找一个post_detail的路径，args是传的参数
-    
+
+
+class InstaUser(AbstractUser):
+    profile_pic = ProcessedImageField(
+        upload_to = 'static/images/profiles',
+        format = 'JPEG',
+        blank=True, 
+        null=True,
+    )
+

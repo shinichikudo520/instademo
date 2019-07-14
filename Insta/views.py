@@ -4,17 +4,23 @@ from django.views.generic import TemplateView,ListView,DetailView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from Insta.models import Post
+from Insta.forms import CustomUserCreationForm
+
 
 # Create your views here.
 
 class HelloDjango(TemplateView):
     template_name = 'home.html'
     
-class PostView(ListView):
+class PostView(LoginRequiredMixin,ListView):
     model  = Post
-    template_name = 'posts.html'
+    template_name = 'index.html'
+    login_url = 'login'
+
 
 class PostDetail(DetailView):
     model  = Post
@@ -38,3 +44,9 @@ class PostDeleteView(DeleteView):
     template_name = 'delete_post.html'
     # 删除成功  重定向路径，reverse_lazy与reverse的区别  就是删除请求与重定向的跳转是同时进行的
     success_url = reverse_lazy('home')
+
+class SignupView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'signup.html'
+    success_url = reverse_lazy('login')
+
